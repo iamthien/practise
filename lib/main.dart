@@ -2,44 +2,71 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: const Text("StateFull widget"),
-            backgroundColor: Colors.amber,
-          ),
-          body: const Center(child: ButtonCount()))));
+    home: Scaffold(
+      backgroundColor: Colors.amber,
+      appBar: AppBar(
+        title: const Text("Count app"),
+      ),
+      body: const Button(),
+    ),
+  ));
 }
 
-class ButtonCount extends StatefulWidget {
-  const ButtonCount({super.key});
+class Button extends StatefulWidget {
+  const Button({super.key});
 
   @override
-  State<ButtonCount> createState() => _ButtonCountState();
+  State<Button> createState() => _ButtonState();
 }
 
-class _ButtonCountState extends State<ButtonCount> {
-  int _count = 0;
+class _ButtonState extends State<Button> {
+  int number = 0;
 
-  void _incrementCount() {
+  void increase() {
     setState(() {
-      _count++; // Increment the count
+      number++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          _count.toString(),
-          style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        ElevatedButton(onPressed: _incrementCount, child: const Text("Count"))
-      ],
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Đến cuối cùng",
+            style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.italic,
+                fontFamily: 'DFVN Les Palmiers'),
+          ),
+          const SizedBox(height: 50),
+          Text(
+            "$number",
+            style: const TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.w900,
+                fontStyle: FontStyle.italic,
+                fontFamily: 'Times New Roman'),
+          ),
+          const SizedBox(height: 30),
+          ElevatedButton(onPressed: increase, child: const Text("Count")),
+          const SizedBox(height: 30),
+          RichText(
+              text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: const <TextSpan>[
+                TextSpan(text: "Hello"),
+                TextSpan(
+                    text: " bold!!!",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                TextSpan(text: " world")
+              ]))
+        ],
+      ),
     );
   }
 }
